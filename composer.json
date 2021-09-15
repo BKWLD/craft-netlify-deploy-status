@@ -1,0 +1,41 @@
+{
+    "name": "bukwild/craft-netlify-deploy-status",
+    "description": "Craft plugin that shows Netlify deploy statuses",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "craft netlify deploy status"
+    ],
+    "support": {
+        "docs": "https://github.com/isaazgarcia/craft-netlify-deploy-status/blob/master/README.md",
+        "issues": "https://github.com/isaazgarcia/craft-netlify-deploy-status/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Isaaz Garcia",
+            "homepage": "https://bukwild.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "bukwild\\craftnetlifydeploystatus\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Craft Netlify Deploy Status",
+        "handle": "craft-netlify-deploy-status",
+        "developer": "Isaaz Garcia",
+        "developerUrl": "https://bukwild.com",
+        "documentationUrl": "https://github.com/isaazgarcia/craft-netlify-deploy-status/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/isaazgarcia/craft-netlify-deploy-status/master/CHANGELOG.md",
+        "class": "bukwild\\craftnetlifydeploystatus\\CraftNetlifyDeployStatus"
+    }
+}

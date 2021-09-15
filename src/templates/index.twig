@@ -1,0 +1,46 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Craft Netlify Deploy Status plugin for Craft CMS 3.x
+ *
+ * Craft Netlify Deploy Status index.twig
+ *
+ * @author    Isaaz Garcia
+ * @copyright Copyright (c) 2021 Isaaz Garcia
+ * @link      https://bukwild.com
+ * @package   CraftNetlifyDeployStatus
+ * @since     1.0.0
+ */
+#}
+
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("bukwild\\craftnetlifydeploystatus\\assetbundles\\craftnetlifydeploystatus\\CraftNetlifyDeployStatusAsset") %}
+{% do view.registerAssetBundle("bukwild\\craftnetlifydeploystatus\\assetbundles\\indexcpsection\\IndexCPSectionAsset") %}
+
+{# Link for the ? icon at the bottom of the page #}
+{% set docsUrl = "https://github.com/isaazgarcia/craft-netlify-deploy-status/blob/master/README.md" %}
+
+{# The title of this CP section #}
+{% set title = "Craft Netlify Deploy Status" %}
+
+{# The URL to this plugin's base CP section #}
+{% set pluginCpUrl = url('craft-netlify-deploy-status') %}
+
+{# Get a URL to an image in our AssetBundle #}
+{% set iconUrl = view.getAssetManager().getPublishedUrl('@bukwild/craftnetlifydeploystatus/assetbundles/indexcpsection/dist', true) ~ '/img/Index-icon.svg' %}
+
+{# Content that should appear in the page header#}
+{% set extraPageHeaderHtml %}
+    <div class="buttons">
+        <a href="{{ pluginCpUrl }}" class="btn submit add icon">{{ "Click Me!"|t('craft-netlify-deploy-status') }}</a>
+    </div>
+{% endset %}
+
+{# The content of the CP Section#}
+{% set content %}
+    <h2>{{ "Index CP Section body goes here"|t('craft-netlify-deploy-status') }}</h2>
+    <img src="{{ iconUrl }}" height="64" width="64" />
+    <p class="textline"></p>
+{% endset %}
