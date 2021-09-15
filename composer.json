@@ -11,8 +11,8 @@
         "craft netlify deploy status"
     ],
     "support": {
-        "docs": "https://github.com/isaazgarcia/craft-netlify-deploy-status/blob/master/README.md",
-        "issues": "https://github.com/isaazgarcia/craft-netlify-deploy-status/issues"
+        "docs": "https://github.com/BKWLD/craft-netlify-deploy-status/blob/master/README.md",
+        "issues": "https://github.com/BKWLD/craft-netlify-deploy-status/issues"
     },
     "license": "MIT",
     "authors": [
@@ -34,8 +34,8 @@
         "handle": "craft-netlify-deploy-status",
         "developer": "Isaaz Garcia",
         "developerUrl": "https://bukwild.com",
-        "documentationUrl": "https://github.com/isaazgarcia/craft-netlify-deploy-status/blob/master/README.md",
-        "changelogUrl": "https://raw.githubusercontent.com/isaazgarcia/craft-netlify-deploy-status/master/CHANGELOG.md",
+        "documentationUrl": "https://github.com/BKWLD/craft-netlify-deploy-status/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/BKWLD/craft-netlify-deploy-status/master/CHANGELOG.md",
         "class": "bukwild\\craftnetlifydeploystatus\\CraftNetlifyDeployStatus"
     }
 }
