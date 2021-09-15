@@ -97,38 +97,43 @@ class Install extends Migration
     {
         $tablesCreated = false;
 
-    // craftnetlifydeploystatus_status table
-        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%craftnetlifydeploystatus_status}}');
+        // craftnetlifydeploystatus_statuses table
+        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%craftnetlifydeploystatus_statuses}}');
         if ($tableSchema === null) {
             $tablesCreated = true;
             $this->createTable(
-                '{{%craftnetlifydeploystatus_status}}',
+                '{{%craftnetlifydeploystatus_statuses}}',
                 [
                     'id' => $this->primaryKey(),
                     'dateCreated' => $this->dateTime()->notNull(),
                     'dateUpdated' => $this->dateTime()->notNull(),
                     'uid' => $this->uid(),
-                // Custom columns in the table
-                    'siteId' => $this->integer()->notNull(),
-                    'some_field' => $this->string(255)->notNull()->defaultValue(''),
+                    // Custom columns in the table
+                    'webhookId' => $this->integer(),
+                    'state' => $this->string()->notNull(),
+                    'name' => $this->string()->notNull(),
+                    'url' => $this->string()->notNull(),
+                    'adminUrl' => $this->string(255)->notNull()->defaultValue(''),
+                    'deployUrl' => $this->string(255)->notNull()->defaultValue(''),
+                    'commitUrl' => $this->string(255)->notNull()->defaultValue(''),
                 ]
             );
         }
 
-    // craftnetlifydeploystatus_webhook table
-        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%craftnetlifydeploystatus_webhook}}');
+        // craftnetlifydeploystatus_webhooks table
+        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%craftnetlifydeploystatus_webhooks}}');
         if ($tableSchema === null) {
             $tablesCreated = true;
             $this->createTable(
-                '{{%craftnetlifydeploystatus_webhook}}',
+                '{{%craftnetlifydeploystatus_webhooks}}',
                 [
                     'id' => $this->primaryKey(),
                     'dateCreated' => $this->dateTime()->notNull(),
                     'dateUpdated' => $this->dateTime()->notNull(),
                     'uid' => $this->uid(),
-                // Custom columns in the table
-                    'siteId' => $this->integer()->notNull(),
-                    'some_field' => $this->string(255)->notNull()->defaultValue(''),
+                    // Custom columns in the table
+                    'name' => $this->string(255)->notNull()->defaultValue(''),
+                    'hash' => $this->string(255)->notNull()->defaultValue(''),
                 ]
             );
         }
@@ -143,43 +148,6 @@ class Install extends Migration
      */
     protected function createIndexes()
     {
-    // craftnetlifydeploystatus_status table
-        $this->createIndex(
-            $this->db->getIndexName(
-                '{{%craftnetlifydeploystatus_status}}',
-                'some_field',
-                true
-            ),
-            '{{%craftnetlifydeploystatus_status}}',
-            'some_field',
-            true
-        );
-        // Additional commands depending on the db driver
-        switch ($this->driver) {
-            case DbConfig::DRIVER_MYSQL:
-                break;
-            case DbConfig::DRIVER_PGSQL:
-                break;
-        }
-
-    // craftnetlifydeploystatus_webhook table
-        $this->createIndex(
-            $this->db->getIndexName(
-                '{{%craftnetlifydeploystatus_webhook}}',
-                'some_field',
-                true
-            ),
-            '{{%craftnetlifydeploystatus_webhook}}',
-            'some_field',
-            true
-        );
-        // Additional commands depending on the db driver
-        switch ($this->driver) {
-            case DbConfig::DRIVER_MYSQL:
-                break;
-            case DbConfig::DRIVER_PGSQL:
-                break;
-        }
     }
 
     /**
@@ -189,27 +157,7 @@ class Install extends Migration
      */
     protected function addForeignKeys()
     {
-    // craftnetlifydeploystatus_status table
-        $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%craftnetlifydeploystatus_status}}', 'siteId'),
-            '{{%craftnetlifydeploystatus_status}}',
-            'siteId',
-            '{{%sites}}',
-            'id',
-            'CASCADE',
-            'CASCADE'
-        );
-
-    // craftnetlifydeploystatus_webhook table
-        $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%craftnetlifydeploystatus_webhook}}', 'siteId'),
-            '{{%craftnetlifydeploystatus_webhook}}',
-            'siteId',
-            '{{%sites}}',
-            'id',
-            'CASCADE',
-            'CASCADE'
-        );
+        $this->addForeignKey(null, '{{%craftnetlifydeploystatus_statuses}}', ['webhookId'], '{{%craftnetlifydeploystatus_webhooks}}', ['id'], 'SET NULL');
     }
 
     /**
@@ -228,10 +176,10 @@ class Install extends Migration
      */
     protected function removeTables()
     {
-    // craftnetlifydeploystatus_status table
-        $this->dropTableIfExists('{{%craftnetlifydeploystatus_status}}');
+        // craftnetlifydeploystatus_status table
+        $this->dropTableIfExists('{{%craftnetlifydeploystatus_statuses}}');
 
-    // craftnetlifydeploystatus_webhook table
-        $this->dropTableIfExists('{{%craftnetlifydeploystatus_webhook}}');
+        // craftnetlifydeploystatus_webhook table
+        $this->dropTableIfExists('{{%craftnetlifydeploystatus_webhooks}}');
     }
 }
