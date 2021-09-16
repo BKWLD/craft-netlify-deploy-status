@@ -22,7 +22,16 @@
             },
 
             copyUrl: function() {
-                window.prompt("Copy to clipboard: Ctrl+C, Enter", $('#copy-url-btn').data( "url" ));
+                if (!navigator.clipboard) {
+                    window.prompt("Copy to clipboard: Ctrl+C, Enter", $('#copy-url-btn').data( "url" ));
+                    return;
+                }
+                navigator.clipboard.writeText($('#copy-url-btn').data( "url" )).then(function() {
+                    console.log('Async: Copying to clipboard was successful!');
+                }, function(err) {
+                    console.error('Async: Could not copy text: ', err);
+                });
+                Craft.cp.displayNotice(Craft.t('craft-netlify-deploy-status', 'Webhook URL copied.'));
             },
 
             deleteWebhook: function() {
@@ -33,6 +42,7 @@
                     Craft.postActionRequest('craft-netlify-deploy-status/webhook/delete', {id}, $.proxy(function(response, textStatus) {
                         if (textStatus === 'success') {
                             if (response.success) {
+                                Craft.cp.displayNotice(Craft.t('craft-netlify-deploy-status', 'Webhook deleted.'));
                                 location.href = Craft.getUrl('craft-netlify-deploy-status/manage-webhooks');
                             }
                             else if (response.errors) {
