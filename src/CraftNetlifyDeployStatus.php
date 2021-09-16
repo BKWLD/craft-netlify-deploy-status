@@ -94,16 +94,6 @@ class CraftNetlifyDeployStatus extends Plugin
         parent::init();
         self::$plugin = $this;
 
-        // Register our site routes
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                $event->rules['siteActionTrigger1'] = 'craft-netlify-deploy-status/status';
-                $event->rules['siteActionTrigger2'] = 'craft-netlify-deploy-status/webhook';
-            }
-        );
-
         // Register our CP routes
         Event::on(
             UrlManager::class,

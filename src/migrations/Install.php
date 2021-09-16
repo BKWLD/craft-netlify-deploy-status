@@ -114,8 +114,8 @@ class Install extends Migration
                     'name' => $this->string()->notNull(),
                     'url' => $this->string()->notNull(),
                     'adminUrl' => $this->string(255)->notNull()->defaultValue(''),
-                    'deployUrl' => $this->string(255)->notNull()->defaultValue(''),
-                    'commitUrl' => $this->string(255)->notNull()->defaultValue(''),
+                    'deployUrl' => $this->string(255)->null()->defaultValue(''),
+                    'commitUrl' => $this->string(255)->null()->defaultValue(''),
                 ]
             );
         }
@@ -129,7 +129,7 @@ class Install extends Migration
                 [
                     'id' => $this->primaryKey(),
                     'dateCreated' => $this->dateTime()->notNull(),
-                    'dateUpdated' => $this->dateTime()->notNull(),
+                    'dateUpdated' => $this->dateTime()->null(),
                     'uid' => $this->uid(),
                     // Custom columns in the table
                     'name' => $this->string(255)->notNull()->defaultValue(''),
