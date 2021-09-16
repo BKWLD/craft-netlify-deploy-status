@@ -140,7 +140,9 @@ class WebhookController extends Controller
         $id = $this->request->getRequiredBodyParam('id');
         Db::delete('{{%craftnetlifydeploystatus_webhooks}}', ['id' => $id]);
 
-        return $this->redirectToPostedUrl();
+        return $this->asJson([
+            'success' => true,
+        ]);
     }
 
 }
