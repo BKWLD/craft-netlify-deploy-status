@@ -109,28 +109,8 @@ class CraftNetlifyDeployStatus extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['cpActionTrigger1'] = 'craft-netlify-deploy-status/status/do-something';
-                $event->rules['cpActionTrigger2'] = 'craft-netlify-deploy-status/webhook/do-something';
-            }
-        );
-
-        // Register our widgets
-        Event::on(
-            Dashboard::class,
-            Dashboard::EVENT_REGISTER_WIDGET_TYPES,
-            function (RegisterComponentTypesEvent $event) {
-                $event->types[] = CraftNetlifyDeployStatusWidgetWidget::class;
-            }
-        );
-
-        // Do something after we're installed
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
-                if ($event->plugin === $this) {
-                    // We were just installed
-                }
+                $event->rules['craft-netlify-deploy-status'] = 'craft-netlify-deploy-status/status/index';
+                $event->rules['craft-netlify-deploy-status/manage-webhooks'] = 'craft-netlify-deploy-status/webhook/index';
             }
         );
 
@@ -160,6 +140,19 @@ class CraftNetlifyDeployStatus extends Plugin
             ),
             __METHOD__
         );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCpNavItem()
+    {
+        $item = parent::getCpNavItem();
+        $item['subnav'] = [
+            'activity' => ['label' => Craft::t('webhooks', 'Activity'), 'url' => 'craft-netlify-deploy-status'],
+            'manage' => ['label' => Craft::t('webhooks', 'Incoming Webhooks'), 'url' => 'craft-netlify-deploy-status/manage-webhooks'],
+        ];
+        return $item;
     }
 
     // Protected Methods

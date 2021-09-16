@@ -29,34 +29,24 @@ use craft\base\Model;
  */
 class Webhook extends Model
 {
-    // Public Properties
-    // =========================================================================
+    /**
+     * @var int
+     */
+    public $id;
 
     /**
-     * Some model attribute
-     *
      * @var string
      */
-    public $someAttribute = 'Some Default';
-
-    // Public Methods
-    // =========================================================================
+    public $name;
 
     /**
-     * Returns the validation rules for attributes.
-     *
-     * Validation rules are used by [[validate()]] to check if attribute values are valid.
-     * Child classes may override this method to declare different validation rules.
-     *
-     * More info: http://www.yiiframework.com/doc-2.0/guide-input-validation.html
-     *
-     * @return array
+     * @inheritdoc
      */
-    public function rules()
+    protected function defineRules(): array
     {
         return [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
+            [['name'], 'trim'],
+            [['name'], 'required'],
         ];
     }
 }

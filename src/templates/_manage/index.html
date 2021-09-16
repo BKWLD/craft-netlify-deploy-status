@@ -1,0 +1,45 @@
+{% extends '_layouts/cp' %}
+{% set title = 'Incoming Webhooks'|t('webhooks') %}
+{% set selectedSubnavItem = 'manage' %}
+
+{% block actionButton %}
+  <div id="new-webhook-btn" class="btn add icon">{{ "New incoming webhook"|t('craft-netlify-deploy-status') }}</div>
+{% endblock %}
+
+{% block content %}
+  {% if webhooks|length %}
+    <table class="data fullwidth">
+      <thead>
+        <tr>
+          <th>{{ 'Name'|t('craft-netlify-deploy-status') }}</th>
+          <th>{{ 'Webhook URL'|t('craft-netlify-deploy-status') }}</th>
+          <th>{{ 'Actions'|t('craft-netlify-deploy-status') }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for webhook in webhooks %}
+          <tr data-id="{{ webhook.id }}">
+            <th>{{ webhook.name }}</th>
+            <td>{{ actionUrl('craft-netlify-deploy-status/notification/create', { id: webhook.uid }) }}
+              <div class="btn" id="copy-url-btn" data-url="{{ actionUrl('craft-netlify-deploy-status/notification/create', { id: webhook.uid }) }}">Copy</div>
+            </td>
+            <td>
+              <a class="formsubmit error"
+                 data-action="craft-netlify-deploy-status/webhook/delete"
+                 data-confirm="{{ 'Are you sure you want to delete the webhook “{name}”?'|t('webhooks', {name: webhook.name}) }}"
+                 data-redirect="{{ ('craft-netlify-deploy-status' ~ (webhook.id ? "/#{webhook.id}"))|hash }}"
+              >
+              {{ 'Delete webhook'|t('craft-netlify-deploy-status') }}
+              </a>
+
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="zilch">
+      <p>{{ 'No webhooks exist yet.'|t('webhooks') }}</p>
+    </div>
+  {% endif %}
+{% endblock %}

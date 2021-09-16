@@ -10,10 +10,18 @@
 
 namespace bukwild\craftnetlifydeploystatus\controllers;
 
-use bukwild\craftnetlifydeploystatus\CraftNetlifyDeployStatus;
+use bukwild\craftnetlifydeploystatus\assetbundles\activity\ActivityAsset;
 
 use Craft;
 use craft\web\Controller;
+use craft\db\Paginator;
+use craft\db\Query;
+use craft\helpers\Db;
+use craft\helpers\Json;
+use craft\web\twig\variables\Paginate;
+use yii\web\BadRequestHttpException;
+use yii\web\Response;
+use yii\base\InvalidArgumentException;
 
 /**
  * Status Controller
@@ -37,17 +45,6 @@ use craft\web\Controller;
  */
 class StatusController extends Controller
 {
-
-    // Protected Properties
-    // =========================================================================
-
-    /**
-     * @var    bool|array Allows anonymous access to this controller's actions.
-     *         The actions must be in 'kebab-case'
-     * @access protected
-     */
-    protected $allowAnonymous = ['index', 'do-something'];
-
     // Public Methods
     // =========================================================================
 
@@ -59,21 +56,36 @@ class StatusController extends Controller
      */
     public function actionIndex()
     {
-        $result = 'Welcome to the StatusController actionIndex() method';
 
-        return $result;
+        Craft::$app->getView()->registerAssetBundle(ActivityAsset::class);
+
+        $query = (new Query())
+            ->select(['s.*', 'w.name'])
+            ->from(['{{%craftnetlifydeploystatus_statuses}} s'])
+            ->leftJoin('{{%craftnetlifydeploystatus_webhooks}} w', '[[w.id]] = [[s.webhookId]]')
+            ->orderBy(['id' => SORT_DESC]);
+
+        $paginator = new Paginator($query, [
+            'currentPage' => $this->request->getPageNum(),
+        ]);
+
+        $statuses = $paginator->getPageResults();
+
+        return $this->renderTemplate('craft-netlify-deploy-status/_activity/index', [
+            'statuses' => $statuses,
+            'pageInfo' => Paginate::create($paginator),
+        ]);
     }
 
     /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/craft-netlify-deploy-status/status/do-something
+     * Clears the requests table.
      *
-     * @return mixed
+     * @return Response
+     * @since 2.3.0
      */
-    public function actionDoSomething()
+    public function actionClear(): Response
     {
-        $result = 'Welcome to the StatusController actionDoSomething() method';
-
-        return $result;
+        Db::delete('{{%craftnetlifydeploystatus_statuses}}');
+        return $this->redirect('craft-netlify-deploy-status/');
     }
 }

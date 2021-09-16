@@ -133,7 +133,6 @@ class Install extends Migration
                     'uid' => $this->uid(),
                     // Custom columns in the table
                     'name' => $this->string(255)->notNull()->defaultValue(''),
-                    'hash' => $this->string(255)->notNull()->defaultValue(''),
                 ]
             );
         }

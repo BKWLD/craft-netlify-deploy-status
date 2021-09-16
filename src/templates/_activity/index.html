@@ -1,0 +1,40 @@
+{% extends '_layouts/cp' %}
+{% set title = 'Activity'|t('webhooks') %}
+{% set selectedSubnavItem = 'activity' %}
+
+{% block content %}
+
+  <table id="activity" class="fullwidth data">
+    <thead>
+    <tr>
+      <th>{{ 'ID'|t('craft-netlify-deploy-status') }}</th>
+      <th>{{ 'Date Created'|t('craft-netlify-deploy-status') }}</th>
+      <th>{{ 'Status'|t('craft-netlify-deploy-status') }}</th>
+      <th>{{ 'URL'|t('craft-netlify-deploy-status') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for status in statuses %}
+    <tr>
+      <td>{{ status.id }}</td>
+      <td>{{ status.dateCreated ? date(status.dateCreated)|datetime('short') }}</td>
+      <td>{{ status.state }}</td>
+      <td>{{ status.url }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  {% include '_includes/pagination' with {
+    prevLabel: 'Newer Activity'|t('craft-netlify-deploy-status'),
+    nextLabel: 'Older Activity'|t('craft-netlify-deploy-status'),
+    noResultsLabel: 'No Activity logged'|t('craft-netlify-deploy-status')
+  } %}
+
+{% endblock %}
+
+{% block actionButton %}
+  {% if statuses|length %}
+    <a class="btn" href="{{ actionUrl('craft-netlify-deploy-status/status/clear') }}">{{ 'Clear'|t('craft-netlify-deploy-status') }}</a>
+  {% endif %}
+{% endblock %}

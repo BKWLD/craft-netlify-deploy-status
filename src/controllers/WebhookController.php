@@ -10,10 +10,20 @@
 
 namespace bukwild\craftnetlifydeploystatus\controllers;
 
+use bukwild\craftnetlifydeploystatus\assetbundles\indexcpsection\IndexCPSectionAsset;
 use bukwild\craftnetlifydeploystatus\CraftNetlifyDeployStatus;
 
+use bukwild\craftnetlifydeploystatus\models\Webhook;
 use Craft;
 use craft\web\Controller;
+use craft\db\Paginator;
+use craft\db\Query;
+use craft\helpers\Db;
+use craft\helpers\Json;
+use craft\helpers\StringHelper;
+use craft\web\twig\variables\Paginate;
+use yii\web\BadRequestHttpException;
+use yii\web\Response;
 
 /**
  * Webhook Controller
@@ -46,7 +56,7 @@ class WebhookController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'do-something'];
+    protected $allowAnonymous = false;
 
     // Public Methods
     // =========================================================================
@@ -59,21 +69,78 @@ class WebhookController extends Controller
      */
     public function actionIndex()
     {
-        $result = 'Welcome to the WebhookController actionIndex() method';
+        Craft::$app->getView()->registerAssetBundle(IndexCPSectionAsset::class);
 
-        return $result;
+        $results = (new Query())
+            ->select(['*'])
+            ->from(['{{%craftnetlifydeploystatus_webhooks}}'])
+            ->orderBy(['id' => SORT_DESC])
+            ->all();
+
+        return $this->renderTemplate('craft-netlify-deploy-status/_manage/index', [
+            'webhooks' => $results,
+        ]);
+
     }
 
     /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/craft-netlify-deploy-status/webhook/do-something
+     * Saves a webhook
      *
-     * @return mixed
+     * @return Response
+     * @throws BadRequestHttpException
      */
-    public function actionDoSomething()
+    public function actionSave(): Response
     {
-        $result = 'Welcome to the WebhookController actionDoSomething() method';
+        $this->requirePostRequest();
 
-        return $result;
+        $id = $this->request->getBodyParam('id');
+        $name = $this->request->getRequiredBodyParam('name');
+        $webhook = new Webhook(compact('id', 'name'));
+
+        $db = Craft::$app->getDb();
+
+        if ($db->getIsMysql()) {
+            $name = StringHelper::encodeMb4($webhook->name);
+        } else {
+            $name = $webhook->name;
+        }
+
+        if ($webhook->id) {
+            Db::update('{{%craftnetlifydeploystatus_webhooks}}', [
+                'name' => $name,
+            ], [
+                'id' => $webhook->id,
+            ]);
+        } else {
+            Db::insert('{{%craftnetlifydeploystatus_webhooks}}', [
+                'name' => $name,
+            ]);
+
+            $webhook->id = (int)$db->getLastInsertID('{{%craftnetlifydeploystatus_webhooks}}');
+        }
+
+        if (!$id) {
+            Craft::$app->getSession()->setNotice(Craft::t('craft-netlify-deploy-status', 'Webhook created.'));
+        }
+
+        return $this->asJson([
+            'success' => true,
+            'webhook' => $webhook,
+        ]);
     }
+
+    /**
+     * Deletes a webhook.
+     *
+     * @return Response
+     */
+    public function actionDelete(): Response
+    {
+        $this->requirePostRequest();
+        $id = $this->request->getRequiredBodyParam('id');
+        Db::delete('{{%craftnetlifydeploystatus_webhooks}}', ['id' => $id]);
+
+        return $this->redirectToPostedUrl();
+    }
+
 }
