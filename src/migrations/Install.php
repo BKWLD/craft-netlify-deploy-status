@@ -156,7 +156,15 @@ class Install extends Migration
      */
     protected function addForeignKeys()
     {
-        $this->addForeignKey(null, '{{%craftnetlifydeploystatus_statuses}}', ['webhookId'], '{{%craftnetlifydeploystatus_webhooks}}', ['id'], 'SET NULL');
+        $this->addForeignKey(
+            $this->db->getForeignKeyName('{{%craftnetlifydeploystatus_statuses}}', 'siteId'),
+            '{{%craftnetlifydeploystatus_statuses}}',
+            'webhookId',
+            '{{%craftnetlifydeploystatus_webhooks}}',
+            'id',
+            'CASCADE',
+            'CASCADE'
+        );
     }
 
     /**
