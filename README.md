@@ -20,15 +20,7 @@ To install the plugin, follow these instructions.
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Craft Netlify Deploy Status.
 
-## Craft Netlify Deploy Status Overview
-
--Insert text here-
-
 ## Configuring Craft Netlify Deploy Status
-
--Insert text here-
-
-## Using Craft Netlify Deploy Status
 
 -Insert text here-
 
