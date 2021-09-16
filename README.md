@@ -20,7 +20,7 @@ To install the plugin, follow these instructions.
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Craft Netlify Deploy Status.
 
-## Configuring Craft Netlify Deploy Status
+## Adding Webhooks
 1. Create a new incoming webhook in /admin/craft-netlify-deploy-status
 ![img_1.png](img_1.png)
 2. Copy Webhook Url
