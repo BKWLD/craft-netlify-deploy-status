@@ -17,7 +17,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Isaaz Garcia",
+            "name": "Bukwild",
             "homepage": "https://bukwild.com"
         }
     ],
@@ -32,7 +32,7 @@
     "extra": {
         "name": "Netlify Status",
         "handle": "craft-netlify-deploy-status",
-        "developer": "Isaaz Garcia",
+        "developer": "Bukwild",
         "developerUrl": "https://bukwild.com",
         "documentationUrl": "https://github.com/BKWLD/craft-netlify-deploy-status/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/BKWLD/craft-netlify-deploy-status/master/CHANGELOG.md",
