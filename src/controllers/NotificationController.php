@@ -98,9 +98,15 @@ class NotificationController extends Controller
         $name = $bodyParams['name'];
         $state = $bodyParams['state'];
         $url = $bodyParams['url'];
-        $adminUrl = $bodyParams['admin_url'];
+        $adminUrl = $bodyParams['admin_url'] .'/deploys/' .$bodyParams['id'];
         $deployUrl = $bodyParams['deploy_url'];
         $commitUrl = $bodyParams['commit_url'];
+
+        $trigger = '';
+        $searchString = "Deploy triggered by hook: ";
+        if ($bodyParams['title'] !== null && strpos($bodyParams['title'], $searchString) !== false){
+            $trigger = explode($searchString, $bodyParams['title'])[1];
+        }
 
         Db::insert('{{%craftnetlifydeploystatus_statuses}}', [
             'webhookId' => $result['id'],
@@ -110,6 +116,7 @@ class NotificationController extends Controller
             'adminUrl' => $adminUrl,
             'deployUrl' => $deployUrl,
             'commitUrl' => $commitUrl,
+            'trigger' => $trigger,
         ]);
 
         Craft::$app->getSession()->setNotice(Craft::t('craft-netlify-deploy-status', 'Netlify Status created.'));

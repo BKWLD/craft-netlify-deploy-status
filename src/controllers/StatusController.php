@@ -60,7 +60,7 @@ class StatusController extends Controller
         Craft::$app->getView()->registerAssetBundle(ActivityAsset::class);
 
         $query = (new Query())
-            ->select(['s.*', 'w.name as webhook_name'])
+            ->select(['s.*', 'w.name as webhookName'])
             ->from(['{{%craftnetlifydeploystatus_statuses}} s'])
             ->leftJoin('{{%craftnetlifydeploystatus_webhooks}} w', '[[w.id]] = [[s.webhookId]]')
             ->orderBy(['id' => SORT_DESC]);

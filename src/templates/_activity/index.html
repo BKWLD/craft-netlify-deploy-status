@@ -7,23 +7,23 @@
   <table id="activity" class="fullwidth data">
     <thead>
     <tr>
-      <th>{{ 'ID'|t('craft-netlify-deploy-status') }}</th>
+      <th>{{ 'Date'|t('craft-netlify-deploy-status') }}</th>
       <th>{{ 'Webhook Name'|t('craft-netlify-deploy-status') }}</th>
+      <th>{{ 'Trigger'|t('craft-netlify-deploy-status') }}</th>
       <th>{{ 'Status'|t('craft-netlify-deploy-status') }}</th>
-      <th>{{ 'URL'|t('craft-netlify-deploy-status') }}</th>
-      <th>{{ 'Commit URL'|t('craft-netlify-deploy-status') }}</th>
-      <th>{{ 'Date Created'|t('craft-netlify-deploy-status') }}</th>
+      <th>{{ 'Deploy Log'|t('craft-netlify-deploy-status') }}</th>
+      <th>{{ 'Deploy URL'|t('craft-netlify-deploy-status') }}</th>
     </tr>
     </thead>
     <tbody>
     {% for status in statuses %}
     <tr>
-      <td>{{ status.id }}</td>
-      <td>{{ status.webhook_name }}</td>
-      <td>{{ status.state }}</td>
-      <td><a href="{{ status.url }}" target="_blank">{{ status.url }}</a></td>
-      <td><a href="{{ status.commitUrl }}" target="_blank">{{ status.commitUrl }}</a></td>
       <td>{{ status.dateCreated ? date(status.dateCreated)|datetime('short') }}</td>
+      <td>{{ status.webhookName }}</td>
+      <td>{{ status.trigger }}</td>
+      <td>{{ status.state }}</td>
+      <td><a class="btn" href="{{ status.adminUrl }}" target="_blank">Open</a></td>
+      <td><a class="btn primary" href="{{ status.deployUrl }}" target="_blank">Open</a></td>
     </tr>
     {% endfor %}
     </tbody>
