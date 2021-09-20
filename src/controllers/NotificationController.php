@@ -96,7 +96,6 @@ class NotificationController extends Controller
         // Create Status
         $bodyParams = $this->request->getBodyParams();
         $name = $bodyParams['name'];
-        $state = $bodyParams['state'];
         $url = $bodyParams['url'];
         $adminUrl = $bodyParams['admin_url'] .'/deploys/' .$bodyParams['id'];
         $deployUrl = $bodyParams['deploy_url'];
@@ -106,6 +105,13 @@ class NotificationController extends Controller
         $searchString = "Deploy triggered by hook: ";
         if ($bodyParams['title'] !== null && strpos($bodyParams['title'], $searchString) !== false){
             $trigger = explode($searchString, $bodyParams['title'])[1];
+        }
+
+        $state = '';
+        switch ($bodyParams['state']){
+            case 'building': $state = 'building'; break;
+            case 'error': $state = 'failed'; break;
+            case 'ready': case 'deployed': $state = 'deployed'; break;
         }
 
         Db::insert('{{%craftnetlifydeploystatus_statuses}}', [

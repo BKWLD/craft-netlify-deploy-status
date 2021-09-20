@@ -1,13 +1,35 @@
-.webhook-activity-slideout {
-    overflow-y: auto;
+.build-badge {
+    background-color: pink;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
 }
 
-.webhook-activity-slideout .meta {
-    margin-left: -24px;
-    margin-right: -24px;
+.badge-status {
+    display: inline-block;
+    padding: 0 6px 1px 6px;
+    text-transform: capitalize;
+    background-color: #eaebec;
+    color: #0e1e25;
+    border-radius: 5px;
 }
 
-.webhook-activity-slideout .pane.code {
-    max-height: 500px;
-    overflow: auto;
+.badge-status-deployed {
+    background-color: #c9eeea;
+    color: #0d544e;
+}
+
+.badge-status-building {
+    background-color: #ffe4c2;
+    color: #66400f;
+}
+
+.badge-status-failed {
+    background-color: #fed7e2;
+    color: #8e0b30;
+}
+.actions{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
 }

@@ -21,7 +21,9 @@
       <td>{{ status.dateCreated ? date(status.dateCreated)|datetime('short') }}</td>
       <td>{{ status.webhookName }}</td>
       <td>{{ status.trigger }}</td>
-      <td>{{ status.state }}</td>
+      <td class="">
+        <span class="badge-status badge-status-{{ status.state }}">{{ status.state }}</span>
+      </td>
       <td><a class="btn" href="{{ status.adminUrl }}" target="_blank">Open</a></td>
       <td><a class="btn primary" href="{{ status.deployUrl }}" target="_blank">Open</a></td>
     </tr>

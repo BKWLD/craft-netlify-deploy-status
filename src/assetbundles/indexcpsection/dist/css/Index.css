@@ -12,6 +12,8 @@
 
 .actions{
     display: flex;
+    width: 100%;
+    justify-content: flex-start;
 }
 
 .actions > *:not(:first-child) {
