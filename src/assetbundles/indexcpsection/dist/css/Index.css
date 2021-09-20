@@ -9,3 +9,7 @@
  * @package   CraftNetlifyDeployStatus
  * @since     1.0.0
  */
+
+.actions{
+    white-space: nowrap;
+}

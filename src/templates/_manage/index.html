@@ -8,7 +8,7 @@
 
 {% block content %}
   {% if webhooks|length %}
-    <table class="data fullwidth">
+    <table class="data fullwidth table-responsive">
       <thead>
         <tr>
           <th>{{ 'Name'|t('craft-netlify-deploy-status') }}</th>
@@ -20,16 +20,15 @@
         {% for webhook in webhooks %}
           <tr data-id="{{ webhook.id }}">
             <th>{{ webhook.name }}</th>
-            <td>{{ actionUrl('craft-netlify-deploy-status/notification/create', { id: webhook.uid }) }}
-              <div class="btn" id="copy-url-btn" data-url="{{ actionUrl('craft-netlify-deploy-status/notification/create', { id: webhook.uid }) }}">Copy</div>
-            </td>
-            <td>
-              <a class="error"
+            <td>{{ actionUrl('craft-netlify-deploy-status/notification/create', { id: webhook.uid }) }}</td>
+            <td class="actions">
+              <div class="btn" id="copy-url-btn" data-url="{{ actionUrl('craft-netlify-deploy-status/notification/create', { id: webhook.uid }) }}">Copy URL</div>
+              <a class="btn error"
                  id="delete-webhook-btn"
                  data-id="{{ webhook.id }}"
                  data-confirm="{{ 'Are you sure you want to delete the webhook “{name}”?'|t('webhooks', {name: webhook.name}) }}"
               >
-              {{ 'Delete webhook'|t('craft-netlify-deploy-status') }}
+              {{ 'Delete Webhook'|t('craft-netlify-deploy-status') }}
               </a>
 
             </td>
