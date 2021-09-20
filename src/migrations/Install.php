@@ -116,6 +116,7 @@ class Install extends Migration
                     'adminUrl' => $this->string(255)->notNull()->defaultValue(''),
                     'deployUrl' => $this->string(255)->null()->defaultValue(''),
                     'commitUrl' => $this->string(255)->null()->defaultValue(''),
+                    'trigger' => $this->string(255)->null()->defaultValue(''),
                 ]
             );
         }
