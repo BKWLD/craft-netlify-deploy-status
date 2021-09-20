@@ -30,7 +30,7 @@
         }
     },
     "extra": {
-        "name": "Craft Netlify Deploy Status",
+        "name": "Netlify Status",
         "handle": "craft-netlify-deploy-status",
         "developer": "Isaaz Garcia",
         "developerUrl": "https://bukwild.com",
