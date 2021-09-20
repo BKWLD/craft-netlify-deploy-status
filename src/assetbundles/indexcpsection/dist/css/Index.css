@@ -11,5 +11,9 @@
  */
 
 .actions{
-    white-space: nowrap;
+    display: flex;
+}
+
+.actions > *:not(:first-child) {
+    margin-left: 5px;
 }
