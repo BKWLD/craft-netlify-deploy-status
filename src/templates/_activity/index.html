@@ -18,7 +18,7 @@
     <tbody>
     {% for status in statuses %}
     <tr>
-      <td>{{ status.dateCreated ? date(status.dateCreated)|datetime('short') }}</td>
+      <td>{{ status.dateCreated ? date(status.dateCreated)|date('Y-m-d H:i:s', 'America/Los_Angeles') }}</td>
       <td>{{ status.webhookName }}</td>
       <td>{{ status.trigger }}</td>
       <td class="">

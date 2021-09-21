@@ -101,10 +101,16 @@ class NotificationController extends Controller
         $deployUrl = $bodyParams['deploy_url'];
         $commitUrl = $bodyParams['commit_url'];
 
-        $trigger = '';
+        $trigger = 'Manual Deploy';
         $searchString = "Deploy triggered by hook: ";
-        if ($bodyParams['title'] !== null && strpos($bodyParams['title'], $searchString) !== false){
-            $trigger = explode($searchString, $bodyParams['title'])[1];
+        if ($bodyParams['title'] !== null){
+            if (strpos($bodyParams['title'], $searchString) !== false){
+                $trigger = explode($searchString, $bodyParams['title'])[1];
+            }else{
+                $trigger = 'Commit';
+            }
+
+
         }
 
         $state = '';
