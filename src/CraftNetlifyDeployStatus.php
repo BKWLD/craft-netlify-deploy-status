@@ -92,6 +92,12 @@ class CraftNetlifyDeployStatus extends Plugin
     public function init()
     {
         parent::init();
+
+        // Checking if plugin is installed
+        if (!$this->isInstalled) {
+            return;
+        }
+
         self::$plugin = $this;
 
         // Register our CP routes
