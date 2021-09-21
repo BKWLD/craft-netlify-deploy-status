@@ -5,7 +5,7 @@
  * Craft plugin that shows Netlify deploy statuses
  *
  * @link      https://bukwild.com
- * @copyright Copyright (c) 2021 Isaaz Garcia
+ * @copyright Copyright (c) 2021 Bukwild
  */
 
 namespace bukwild\craftnetlifydeploystatus\assetbundles\activity;
@@ -17,7 +17,7 @@ use craft\web\assets\cp\CpAsset;
 /**
  * Activity index asset bundle
  *
- * @author    Isaaz Garcia
+ * @author    Bukwild
  * @package   CraftNetlifyDeployStatus
  * @since     1.0.0
  */

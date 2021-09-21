@@ -5,7 +5,7 @@
  * Craft plugin that shows Netlify deploy statuses
  *
  * @link      https://bukwild.com
- * @copyright Copyright (c) 2021 Isaaz Garcia
+ * @copyright Copyright (c) 2021 Bukwild
  */
 
 namespace bukwild\craftnetlifydeploystatus;
@@ -33,7 +33,7 @@ use yii\base\Event;
  *
  * https://docs.craftcms.com/v3/extend/
  *
- * @author    Isaaz Garcia
+ * @author    Bukwild
  * @package   CraftNetlifyDeployStatus
  * @since     1.0.0
  *

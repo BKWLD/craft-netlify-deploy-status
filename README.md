@@ -39,4 +39,4 @@ To install the plugin, follow these instructions.
 
 * Release it
 
-Brought to you by [Isaaz Garcia](https://bukwild.com)
+Brought to you by [Bukwild](https://bukwild.com)

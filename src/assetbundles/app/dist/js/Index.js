@@ -2,8 +2,8 @@
  * Craft Netlify Deploy Status plugin for Craft CMS
  *
  *
- * @author    Isaaz Garcia
- * @copyright Copyright (c) 2021 Isaaz Garcia
+ * @author    Bukwild
+ * @copyright Copyright (c) 2021 Bukwild
  * @link      https://bukwild.com
  * @package   CraftNetlifyDeployStatus
  * @since     1.0.0
