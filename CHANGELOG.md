@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adding badges to statuses
 - Adding loading to the Netlify Status icon in the Nav
 - Adding more styles
+
+### Changed
 - Changing icon
 - Minimal fixes
 
