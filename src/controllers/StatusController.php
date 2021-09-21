@@ -88,4 +88,24 @@ class StatusController extends Controller
         Db::delete('{{%craftnetlifydeploystatus_statuses}}');
         return $this->redirect('craft-netlify-deploy-status/');
     }
+
+    public function actionIsDeploying()
+    {
+
+        $subQuery =(new Query())
+            ->select(['webhookId, MAX(id) as id'])
+            ->from(['{{%craftnetlifydeploystatus_statuses}}'])
+            ->groupBy(['webhookId']);
+
+        $result = (new Query())
+            ->select(['*'])
+            ->from(['{{%craftnetlifydeploystatus_statuses}} as s1'])
+            ->innerJoin(['s2' => $subQuery], '[[s1.id]] = [[s2.id]]')
+            ->where('state != "deployed"')
+            ->all();
+
+        return $this->asJson([
+            'isDeploying' => count($result) > 0
+        ]);
+    }
 }

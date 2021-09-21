@@ -11,7 +11,7 @@
 namespace bukwild\craftnetlifydeploystatus;
 
 use bukwild\craftnetlifydeploystatus\widgets\CraftNetlifyDeployStatusWidget as CraftNetlifyDeployStatusWidgetWidget;
-
+use bukwild\craftnetlifydeploystatus\assetbundles\app\AppAsset;
 use Craft;
 use craft\base\Plugin;
 use craft\services\Plugins;
@@ -104,6 +104,9 @@ class CraftNetlifyDeployStatus extends Plugin
             }
         );
 
+        // Load Nav
+        Craft::$app->getView()->registerAssetBundle(AppAsset::class);
+
 /**
  * Logging in Craft involves using one of the following methods:
  *
@@ -148,4 +151,12 @@ class CraftNetlifyDeployStatus extends Plugin
     // Protected Methods
     // =========================================================================
 
+    private function isDeploying(){
+//        $result = (new Query())
+//            ->select(['id'])
+//            ->from(['{{%craftnetlifydeploystatus_statuses}}'])
+//            ->one();
+
+        return true;
+    }
 }
