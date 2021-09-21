@@ -10,7 +10,6 @@
  */
 
 (function ($) {
-
     /** global: Craft */
     /** global: Garnish */
     var Manager = Garnish.Base.extend(
@@ -24,21 +23,18 @@
             checkIsDeploying: function () {
                 Craft.postActionRequest('craft-netlify-deploy-status/status/is-deploying', {}, $.proxy(function (response, textStatus) {
                     if (textStatus === 'success') {
-                        console.log('checking...')
                         if (response.isDeploying){
                             this.changeNavIcon(true)
                         }else{
                             this.changeNavIcon(false)
                             if (this.timeout) clearTimeout(this.timeout)
                         }
-
                     }
                 }, this));
             },
 
             changeNavIcon: function (loading = true) {
                 let iconContainer = document.querySelector('#nav-craft-netlify-deploy-status .icon')
-
                 if (!iconContainer) return
 
                 if (loading) {
@@ -69,9 +65,7 @@
                 }
             },
 
-
         });
-
 
     Garnish.$doc.ready(function () {
         new Manager();
