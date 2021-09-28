@@ -16,7 +16,9 @@ use Craft;
 use craft\base\Plugin;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
+use craft\events\TemplateEvent;
 use craft\web\UrlManager;
+use craft\web\View;
 use craft\services\Dashboard;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
@@ -111,7 +113,13 @@ class CraftNetlifyDeployStatus extends Plugin
         );
 
         // Load Nav
-        Craft::$app->getView()->registerAssetBundle(AppAsset::class);
+        Event::on(
+            View::class,
+            View::EVENT_BEFORE_RENDER_PAGE_TEMPLATE,
+            function (TemplateEvent $event) {
+                Craft::$app->getView()->registerAssetBundle(AppAsset::class);
+            }
+        );
 
 /**
  * Logging in Craft involves using one of the following methods:
