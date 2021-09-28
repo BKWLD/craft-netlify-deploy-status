@@ -102,7 +102,7 @@ class StatusController extends Controller
             ->from(['{{%craftnetlifydeploystatus_statuses}} as s1'])
             ->innerJoin(['s2' => $subQuery], '[[s1.id]] = [[s2.id]]')
             ->where('dateCreated >= DATE_SUB(NOW(),INTERVAL 60 minute)')
-            ->where('state = "building"')
+            ->where(['state' => "building"])
             ->all();
 
         return $this->asJson([
