@@ -100,6 +100,12 @@ class CraftNetlifyDeployStatus extends Plugin
             return;
         }
 
+        // Checking if user is guest
+        $userIsGuest = Craft::$app->user->isGuest;
+        if ($userIsGuest) {
+            return;
+        }
+
         self::$plugin = $this;
 
         // Register our CP routes
