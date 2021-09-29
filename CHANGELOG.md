@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.7 - 2021-09-29
+### Fixed
+- Fixing issue where the plugin would run when the user is not logged in.
+
 ## 1.0.6 - 2021-09-28
 ### Fixed
 - Fixing issue with assetBundle resolving.
