@@ -31,7 +31,7 @@ To install the plugin, follow these instructions.
 3. In Netlify, go to Site Settings ->  Build & Deploy -> Deploy Notifications, click on Add notification and select Outgoing Webhook
         ![img_3.png](docs/img_3.png)
 
-4. Paste the Webhook URL in the URL to notify field and select an event to listen for and click Save. Note: use the same Webhook URL for all the events in a projet you want to get notifications from. One Webhook URL per Netlify project.
+4. Paste the Webhook URL in the URL to notify field and select an event to listen for and click Save. *NOTE*: use the same Webhook URL for all the events in a single project you want to get notifications from. One Webhook URL per Netlify project.
         ![img_4.png](docs/img_4.png)
 
 5. To test the webhook, try deploying a site or making a commit to the site. (If redeploying the site there will be no Commit URL)
