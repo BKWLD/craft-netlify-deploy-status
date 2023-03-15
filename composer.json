@@ -36,5 +36,10 @@
         "documentationUrl": "https://github.com/BKWLD/craft-netlify-deploy-status/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/BKWLD/craft-netlify-deploy-status/master/CHANGELOG.md",
         "class": "bukwild\\craftnetlifydeploystatus\\CraftNetlifyDeployStatus"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "craftcms/rector": "dev-main"
     }
 }
