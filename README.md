@@ -1,10 +1,10 @@
-# Craft Netlify Deploy Status plugin for Craft CMS 3.x
+# Craft Netlify Deploy Status
 
 Craft plugin that shows Netlify deploy statuses
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-beta.23 or later.
+This plugin requires Craft CMS 3 or 4.
 
 ## Installation
 
